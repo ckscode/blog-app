@@ -7,6 +7,17 @@ module.exports = {
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx}',
   ],
-  theme: {},
+  theme: {
+    extend:{
+      fontFamily:{
+        poppins:'var(--font-poppins)',
+        questrial:'var(--font-questrial)'
+      },
+    }
+  },
   plugins: [],
 };
+
+const flowbite = require("flowbite-react/tailwind");
+
+

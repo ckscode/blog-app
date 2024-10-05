@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+@layer components {
+  .btn {
+    @apply disabled:bg-green-200 disabled:cursor-not-allowed bg-green-500 hover:bg-green-600 w-11/12 mx-auto my-2 text-white px-4 py-2 uppercase tracking-wider rounded-md transition-colors block;
+  }
+  .h1{
+    @apply text-4xl font-bold;
+  }
+
+  .h2{
+    @apply text-3xl font-bold;
+  }
+
+  .h3{
+    @apply text-2xl font-bold;
+  }
+
+  .h4{
+    @apply text-xl font-bold;
+  }
+
+  .h5{
+    @apply text-lg font-bold;
+  }
+}
