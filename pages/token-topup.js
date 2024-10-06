@@ -17,11 +17,18 @@ export default function TokenTopup() {
       
        
   }
-    return <div>
-     tokenTopup
+    return <div className="h-screen flex justify-center items-center">
+      <div className="w-1/3 text-center">
+      <div className="h2">
+      TokenTopup
+      </div>
+      <div>
+        (10 tokens)
+      </div>
      <button className="btn" onClick={handleClick}>
           Add Tokens
      </button>
+     </div>
     </div>;
   }
 

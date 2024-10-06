@@ -18,6 +18,6 @@ module.exports = {
   plugins: [],
 };
 
-const flowbite = require("flowbite-react/tailwind");
+
 
 

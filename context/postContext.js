@@ -40,9 +40,7 @@ const deletePost = useCallback((postId)=>{
                 });
                 return result
              })
-                
-                
-             console.log(posts)
+
     },[])
     return (
         <PostsContext.Provider value={{posts,setPostFromSSR,getPosts,noMorePosts,deletePost}}>
