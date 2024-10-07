@@ -11,17 +11,13 @@ import { useContext, useEffect } from "react";
 export const AppLayout = ({ children,availableTokens,posts:postsFromSSR,postId,postCreated }) => {
   const { user } = useUser();
    
-  const {posts,setPostFromSSR,getPosts,noMorePosts} = useContext(PostsContext)
-
+  const {posts,setPostFromSSR,getPosts} = useContext(PostsContext)
+console.log(posts)
   useEffect(()=>{
-     setPostFromSSR(postsFromSSR)     
-     if (postId) {
-      const exists = postsFromSSR.find((post) => post._id === postId);
-      if (!exists) {
-        getPosts({ getNewerPosts: true, lastPostDate: postCreated });
-      }
-    }
-  },[postId])
+     setPostFromSSR(postsFromSSR) 
+     getPosts()    
+  
+  },[postsFromSSR, setPostFromSSR, postId, postCreated])
   return (
     <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
       <div className="flex flex-col text-black-800 overflow-hidden shadow-xl ">
@@ -41,8 +37,8 @@ export const AppLayout = ({ children,availableTokens,posts:postsFromSSR,postId,p
             <Link className={`block p-2 hover:bg-slate-300 rounded-md overflow-hidden text-ellipsis whitespace-nowrap ${postId===post._id?"bg-gray-300":""}`} key={post._id} href={`/post/${post._id}`}>{post.topic}</Link>
           )
          })}
-         {!noMorePosts&&
-          <div onClick={()=>getPosts({lastPostDate:posts[posts.length-1].createdAt})} className="text-sm hover:underline text-center cursor-pointer">Load more posts</div>}
+         {/* {!noMorePosts&&
+          <div onClick={()=>getPosts({lastPostDate:posts[posts.length-1].createdAt})} className="text-sm hover:underline text-center cursor-pointer">Load more posts</div>} */}
          </div>
         </div>
         <div className="bg-slate-100 flex flex-row p-3 border-t border-slate-300">

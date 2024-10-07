@@ -7,7 +7,6 @@ export default PostsContext;
 
 export const PostsProvider = ({children}) =>{
     const [posts,setPosts] = useState([]);
-    const [noMorePosts,setNoMorePosts] = useState(false)
 
 const deletePost = useCallback((postId)=>{
         setPosts(value =>{
@@ -20,30 +19,24 @@ const deletePost = useCallback((postId)=>{
     const setPostFromSSR = useCallback((postsFromSSR = [])=>{
         console.log('POSTS FROM SSR',postsFromSSR)
         setPosts(postsFromSSR)
-    },[posts])
+    
+    },[])
 
-    const getPosts = useCallback(async({lastPostDate, getNewerPosts = false})=>{
-             const result = await axios.post(`/api/getPosts`,{lastPostDate,getNewerPosts})
-             .then((res)=>{return res.data}).catch((err)=>console.log(err));
-             const postResult = result.posts || [];
-             if(postResult.length < 5){
-                setNoMorePosts(true);
-             }
-             setPosts((e)=> {
-                const result = [...e]
-                postResult.forEach(element => {
-                      const exists = result.find(e=>e._id===element._id);
-                      if(exists){
-                        return result
-                      }
-                        result.push(element)    
-                });
-                return result
-             })
+    const getPosts = useCallback(async()=>{
+      try{
+        const result = await axios.post(`/api/getPosts`)
+        .then((res)=>{return res.data}).catch((err)=>console.log(err));
+        const postResult = result.posts || [];
+     
+        setPosts(postResult)
+      }catch(error){
+        console.log("ERROR IN GETPOST",error)
+      }
+           
 
     },[])
     return (
-        <PostsContext.Provider value={{posts,setPostFromSSR,getPosts,noMorePosts,deletePost}}>
+        <PostsContext.Provider value={{posts,setPostFromSSR,getPosts,deletePost}}>
         {children}
       </PostsContext.Provider>
     )

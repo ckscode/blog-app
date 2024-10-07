@@ -11,17 +11,15 @@ export default withApiAuthRequired(async function handler(req,res){
         auth0Id:sub
        })
 
-       const {lastPostDate,getNewerPosts} = req.body;
 
        const posts = await db.collection('posts')
        .find({
         userId:userProfile._id,
-        createdAt:{[getNewerPosts ? '$gt' : '$lt']:new Date(lastPostDate)}
-       }).limit(getNewerPosts ? 0 : 5).sort({createdAt:-1}).toArray();
+       }).sort({createdAt:-1}).toArray();
 
        res.status(200).json({posts});
        return
     }catch(e){
-
+    console.log(e)
     }
 })
