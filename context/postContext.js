@@ -20,7 +20,7 @@ const deletePost = useCallback((postId)=>{
     const setPostFromSSR = useCallback((postsFromSSR = [])=>{
         console.log('POSTS FROM SSR',postsFromSSR)
         setPosts(postsFromSSR)
-    },[])
+    },[posts])
 
     const getPosts = useCallback(async({lastPostDate, getNewerPosts = false})=>{
              const result = await axios.post(`/api/getPosts`,{lastPostDate,getNewerPosts})

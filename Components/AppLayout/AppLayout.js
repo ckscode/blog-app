@@ -21,7 +21,7 @@ export const AppLayout = ({ children,availableTokens,posts:postsFromSSR,postId,p
         getPosts({ getNewerPosts: true, lastPostDate: postCreated });
       }
     }
-  },[])
+  },[postId])
   return (
     <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
       <div className="flex flex-col text-black-800 overflow-hidden shadow-xl ">
